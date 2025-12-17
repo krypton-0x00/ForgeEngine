@@ -87,8 +87,10 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #ifdef KEXPORT
 // Exports
 #ifdef _MSC_VER
+//for windows
 #define FAPI __declspec(dllexport)
 #else
+//for linux
 #define FAPI __attribute__((visibility("default")))
 #endif
 #else

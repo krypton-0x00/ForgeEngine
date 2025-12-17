@@ -1,0 +1,31 @@
+CompileFlags:
+  Compiler: clang
+
+If:
+  PathMatch: .*\.c$
+CompileFlags:
+  Add:
+    - -std=c17
+
+If:
+  PathMatch: .*\.h$
+CompileFlags:
+  Add:
+    - -std=c17
+
+If:
+  PathMatch: .*\.cpp$
+CompileFlags:
+  Add:
+    - -std=c++17
+
+CompileFlags:
+  Add:
+    - -Iengine/src
+    - -Iengine/src/core
+    - -I$VULKAN_SDK/include
+    - -D_DEBUG
+    - -DUNICODE
+    - -D_UNICODE
+    - -DKEXPORT
+
