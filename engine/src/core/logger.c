@@ -1,5 +1,5 @@
 #include "logger.h"
-
+#include "asserts.h"
 // TODO: Temp
 #include <stdio.h>
 #include <string.h>
@@ -14,7 +14,7 @@ void shutdown_logging() {
     // TODO: cleanup logging / and make sure if there is any pending writing queued enttries it should finsh them.
 }
 
-FAPI void log_output(log_level level, const char* message, ...) {
+void log_output(log_level level, const char* message, ...) {
     const char* level_strings[6] = {"[FATAL]:", "[ERROR]:", "[WARN]:", "[INFO]:", "[DEBUG]:", "[TRACE]:"};
     // b8 is_error = level < 2;
 
@@ -39,4 +39,8 @@ FAPI void log_output(log_level level, const char* message, ...) {
     sprintf(out_message2, "%s%s\n", level_strings[level], out_message);
     // TODO: add platfrom specific output
     printf("%s", out_message2);
+}
+
+void report_assertion_failure(const char* expression, const char* message, const char* file, i32 line) {
+    log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, in file %s, line %d\n", expression, message, file, line);
 }
